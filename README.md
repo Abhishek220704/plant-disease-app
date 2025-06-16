@@ -1,1 +1,62 @@
-# Capstone
+# 🌿 Plant Disease Classification Web App
+
+This is a deep learning-based web application for detecting plant diseases from leaf images. The model is trained using a Convolutional Neural Network (CNN) on an augmented dataset and deployed using Streamlit.
+
+🔗 Live Demo: [Click here to try the app](https://plant-disease-app-erjtnkq8ipvbxf36xz9gnt.streamlit.app/)  
+🛠️ Built using: TensorFlow, Keras, Streamlit, Python
+
+---
+
+## 📸 Demo
+
+![app-screenshot](https://raw.githubusercontent.com/yourusername/plant-disease-app/main/demo_screenshot.png)  
+_Example interface (upload a plant image and get disease prediction)_
+
+---
+
+## 🚀 Features
+
+- Upload a leaf image
+- Get predicted plant disease with confidence score
+- Displays healthy vs infected result
+- Uses deep learning (MobileNetV2 + fine-tuning)
+- Trained on over 50,000+ augmented leaf images
+
+---
+
+## 📦 Technologies Used
+
+| Tool/Library       | Purpose                          |
+|--------------------|----------------------------------|
+| TensorFlow / Keras | Model training and inference     |
+| Streamlit          | Web interface for deployment     |
+| Pillow             | Image processing in Python       |
+| NumPy              | Image array handling             |
+| Google Colab       | Model training environment       |
+| Kaggle Dataset     | Training and validation data     |
+
+---
+
+## 🧠 Model Details
+
+- Base Model: MobileNetV2 (Transfer Learning)
+- Input Image Size: 224 x 224
+- Final Accuracy: 92–95% on validation set
+- Trained using ImageDataGenerator with data augmentation
+
+---
+
+## 🗂️ Dataset Source
+
+This app was trained on the following Kaggle dataset:
+
+🔗 [New Plant Diseases Dataset (Augmented)](https://www.kaggle.com/datasets/vipoooool/new-plant-diseases-dataset)
+
+---
+
+## 📂 Installation & Running Locally
+
+1. Clone this repo:
+   ```bash
+   git clone https://github.com/yourusername/plant-disease-app.git
+   cd plant-disease-app
