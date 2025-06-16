@@ -97,6 +97,6 @@ if file:
 # Footer
 st.markdown("---")
 st.markdown(
-    "<div style='text-align: center;'>Made with ❤️ by <b>Abhishek, Tanya, Tauhid, Nakshtra</b></div>",
+    "<div style='text-align: center;'>Made with ❤️ by <b>Abhishek, Tanya, Tauhid, Nakshatra</b></div>",
     unsafe_allow_html=True
 )
