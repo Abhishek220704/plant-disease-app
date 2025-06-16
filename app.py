@@ -59,10 +59,40 @@ class_labels = [
 # Sidebar
 st.sidebar.title("🧬 About this App")
 st.sidebar.markdown("""
-This app uses a deep learning model (MobileNetV2) to predict plant leaf diseases.
-- Trained on 50,000+ images
-- Covers 38 disease/health categories
+## 🧬 About This App
+
+- Detects plant diseases from leaf images  
+- Upload an image → get prediction + confidence  
+- Built for farmers, students & researchers  
+- Fast, accurate & easy to use  
+
+---
+
+## 🧠 Model Info
+
+- Based on MobileNetV2 (Transfer Learning)  
+- Trained on 50,000+ leaf images  
+- Covers 38 plant disease categories  
+- Input size: 224 × 224  
+- Accuracy: ~90% on validation set  
+
+---
+
+## 📂 Dataset
+
+- Source: Kaggle  
+- Name: New Plant Diseases Dataset (Augmented)  
+- Link: [View on Kaggle](https://www.kaggle.com/datasets/vipoooool/new-plant-diseases-dataset)  
+
+---
+
+## 👨‍💻 Developer
+
+- Abhishek,Tanya,Tauhid,Nakshatra 
+- B.Tech Final Year  
+- Capstone Project   
 """)
+
 
 # Main Title
 st.markdown("<h1 style='text-align: center;'>🌿 Plant Disease Classifier</h1>", unsafe_allow_html=True)
