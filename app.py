@@ -4,8 +4,17 @@ from tensorflow.keras.preprocessing import image
 import numpy as np
 from PIL import Image
 
+# Set page config
+st.set_page_config(
+    page_title="Plant Disease Classifier",
+    layout="wide",
+    page_icon="🌿"
+)
+
+# Load the model
 model = load_model("plant_disease_model.h5")
 
+# Class labels (same as your training classes)
 class_labels = [
     "Apple___Apple_scab",
     "Apple___Black_rot",
@@ -47,21 +56,47 @@ class_labels = [
     "Tomato___healthy"
 ]
 
+# Sidebar
+st.sidebar.title("🧬 About this App")
+st.sidebar.markdown("""
+This app uses a deep learning model (MobileNetV2) to predict plant leaf diseases.
+- Trained on 50,000+ images
+- Covers 38 disease/health categories
+- Created by Abhishek Wekhande
+""")
 
-st.title("🌿 Plant Disease Classifier")
-st.write("Upload a plant leaf image to predict disease.")
+# Main Title
+st.markdown("<h1 style='text-align: center;'>🌿 Plant Disease Classifier</h1>", unsafe_allow_html=True)
+st.markdown("<h4 style='text-align: center;'>Upload a leaf image and detect the disease in seconds!</h4>", unsafe_allow_html=True)
+st.write("")
 
-file = st.file_uploader("Upload an image", type=["jpg", "png", "jpeg"])
+# File uploader
+file = st.file_uploader("📤 Upload a plant leaf image", type=["jpg", "jpeg", "png"])
+
 if file:
-    img = Image.open(file).convert('RGB')
-    st.image(img, caption="Uploaded Image", use_column_width=True)
-
-    img = img.resize((224, 224))
-    img_array = image.img_to_array(img) / 255.0
+    img = Image.open(file).convert("RGB")
+    resized_img = img.resize((224, 224))
+    img_array = image.img_to_array(resized_img) / 255.0
     img_array = np.expand_dims(img_array, axis=0)
 
     preds = model.predict(img_array)
     pred_class = class_labels[np.argmax(preds)]
     confidence = np.max(preds)
 
-    st.success(f"Prediction: {pred_class} ({confidence*100:.2f}%)")
+    col1, col2 = st.columns([1, 1])
+
+    with col1:
+        st.image(img, caption="Uploaded Leaf Image", use_column_width=True)
+
+    with col2:
+        st.markdown("### 🧠 Prediction")
+        st.success(f"Detected: {pred_class}")
+        st.markdown(f"**Confidence:** {confidence * 100:.2f}%")
+        st.progress(int(confidence * 100))
+
+# Footer
+st.markdown("---")
+st.markdown(
+    "<div style='text-align: center;'>Made with ❤️ by <b>Abhishek, Tanya, Tauhid, Nakshtra</b></div>",
+    unsafe_allow_html=True
+)
