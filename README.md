@@ -7,13 +7,6 @@ This is a deep learning-based web application for detecting plant diseases from 
 
 ---
 
-## 📸 Demo
-
-![app-screenshot](https://raw.githubusercontent.com/yourusername/plant-disease-app/main/demo_screenshot.png)  
-_Example interface (upload a plant image and get disease prediction)_
-
----
-
 ## 🚀 Features
 
 - Upload a leaf image
