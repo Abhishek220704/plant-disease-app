@@ -62,7 +62,6 @@ st.sidebar.markdown("""
 This app uses a deep learning model (MobileNetV2) to predict plant leaf diseases.
 - Trained on 50,000+ images
 - Covers 38 disease/health categories
-- Created by Abhishek Wekhande
 """)
 
 # Main Title
