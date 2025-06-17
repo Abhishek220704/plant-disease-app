@@ -123,6 +123,21 @@ if file:
         st.markdown(f"**Confidence:** {confidence * 100:.2f}%")
         st.progress(int(confidence * 100))
 
+import pandas as pd
+import matplotlib.pyplot as plt
+
+# Plot full class probabilities as a horizontal bar chart
+pred_df = pd.DataFrame(preds[0], index=class_labels, columns=["Confidence"])
+pred_df = pred_df.sort_values(by="Confidence", ascending=True)
+
+st.markdown("### 📊 Prediction Confidence Across All Classes")
+
+fig, ax = plt.subplots(figsize=(6, len(class_labels) // 2))
+pred_df.plot.barh(ax=ax, legend=False, color='teal')
+ax.set_xlabel("Confidence Score")
+ax.set_xlim([0, 1])
+st.pyplot(fig)
+
 # Footer
 st.markdown("---")
 st.markdown(
