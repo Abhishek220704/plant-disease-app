@@ -103,19 +103,22 @@ st.write("")
 file = st.file_uploader("📤 Upload a plant leaf image", type=["jpg", "jpeg", "png"])
 
 if file:
+    # 1. Load & preprocess the image
     img = Image.open(file).convert("RGB")
     resized_img = img.resize((224, 224))
     img_array = image.img_to_array(resized_img) / 255.0
     img_array = np.expand_dims(img_array, axis=0)
 
+    # 2. Make prediction
     preds = model.predict(img_array)
     pred_class = class_labels[np.argmax(preds)]
     confidence = np.max(preds)
 
+    # 3. Display uploaded image and top prediction
     col1, col2 = st.columns([1, 1])
 
     with col1:
-        st.image(img, caption="Uploaded Image", use_container_width=True)
+        st.image(img, caption="Uploaded Leaf Image", use_container_width=True)
 
     with col2:
         st.markdown("### 🧠 Prediction")
@@ -123,20 +126,21 @@ if file:
         st.markdown(f"**Confidence:** {confidence * 100:.2f}%")
         st.progress(int(confidence * 100))
 
-import pandas as pd
-import matplotlib.pyplot as plt
+    # 4. Show confidence graph for all classes
+    import pandas as pd
+    import matplotlib.pyplot as plt
 
-# Plot full class probabilities as a horizontal bar chart
-pred_df = pd.DataFrame(preds[0], index=class_labels, columns=["Confidence"])
-pred_df = pred_df.sort_values(by="Confidence", ascending=True)
+    pred_df = pd.DataFrame(preds[0], index=class_labels, columns=["Confidence"])
+    pred_df = pred_df.sort_values(by="Confidence", ascending=True)
 
-st.markdown("### 📊 Prediction Confidence Across All Classes")
+    st.markdown("### 📊 Prediction Confidence Across All Classes")
 
-fig, ax = plt.subplots(figsize=(6, len(class_labels) // 2))
-pred_df.plot.barh(ax=ax, legend=False, color='teal')
-ax.set_xlabel("Confidence Score")
-ax.set_xlim([0, 1])
-st.pyplot(fig)
+    fig, ax = plt.subplots(figsize=(6, len(class_labels) // 2))
+    pred_df.plot.barh(ax=ax, legend=False, color='teal')
+    ax.set_xlabel("Confidence Score")
+    ax.set_xlim([0, 1])
+    st.pyplot(fig)
+
 
 # Footer
 st.markdown("---")
