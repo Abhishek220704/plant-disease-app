@@ -2,7 +2,7 @@
 
 This is a deep learning-based web application for detecting plant diseases from leaf images. The model is trained using a Convolutional Neural Network (CNN) on an augmented dataset and deployed using Streamlit.
 
-🔗 Live Demo: [Click here to try the app](https://plant-disease-app-erjtnkq8ipvbxf36xz9gnt.streamlit.app/)  
+🔗 Live Demo: [Click here to try the app](https://plant-disease-app-abhishek.streamlit.app/)  
 🛠️ Built using: TensorFlow, Keras, Streamlit, Python
 
 ---
