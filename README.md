@@ -6,7 +6,18 @@ This is a deep learning-based web application for detecting plant diseases from 
 🛠️ Built using: TensorFlow, Keras, Streamlit, Python
 
 ---
+## 📸 Demo Screenshots
 
+### 🔍 Upload Page
+![Upload Page](demo/ss1.png)
+
+### 🧠 Prediction Result
+![Prediction Result](demo/ss2.png)
+
+### 📊 Confidence Chart
+![Confidence Chart](demo/ss3.png)
+
+---
 ## 🚀 Features
 
 - Upload a leaf image
