@@ -88,7 +88,7 @@ st.sidebar.markdown("""
 
 ## 👨‍💻 Developer
 
-- Abhishek Wekhande 
+- Abhishek,Tanya,Tauhid,Nakshtra
 - B.Tech Final Year  
 - Capstone Project   
 """)
@@ -145,6 +145,6 @@ if file:
 # Footer
 st.markdown("---")
 st.markdown(
-    "<div style='text-align: center;'>Made with ❤️ by <b>Abhishek Wekhande</b></div>",
+    "<div style='text-align: center;'>Made with ❤️ by <b>Abhishek,Tanya,Tauhid,Nakshtra</b></div>",
     unsafe_allow_html=True
 )
