@@ -120,15 +120,21 @@ st.sidebar.markdown("""
 st.markdown("<h1 style='text-align: center;'>🌿 Plant Disease Classifier</h1>", unsafe_allow_html=True)
 st.markdown("<h4 style='text-align: center;'>Upload or capture a leaf image and detect the disease in seconds!</h4>", unsafe_allow_html=True)
 st.write("")
+@
+# --- Input method selection ---
+st.markdown("## 📷 Choose Input Method")
+input_option = st.radio(
+    "Select how you want to provide the leaf image:",
+    ("Upload from device", "Take photo using camera"),
+    index=0
+)
 
-# 📷 Capture or upload image
-st.markdown("## 📸 Capture or Upload Leaf Image")
+file = None
+if input_option == "Upload from device":
+    file = st.file_uploader("📤 Upload a plant leaf image", type=["jpg", "jpeg", "png"])
+elif input_option == "Take photo using camera":
+    file = st.camera_input("📸 Take a photo")
 
-camera_image = st.camera_input("📷 Take a Photo")
-uploaded_file = st.file_uploader("📤 Or Upload a plant leaf image", type=["jpg", "jpeg", "png"])
-
-# Use camera image if available, otherwise uploaded image
-file = camera_image if camera_image else uploaded_file
 
 # Prediction
 if file:
