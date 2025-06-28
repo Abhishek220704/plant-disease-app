@@ -10,6 +10,26 @@ st.set_page_config(
     layout="wide",
     page_icon="🌿"
 )
+import base64
+
+def add_bg_from_local(image_file):
+    with open(image_file, "rb") as file:
+        encoded_string = base64.b64encode(file.read()).decode()
+    css = f"""
+    <style>
+    .stApp {{
+        background-image: url("data:image/jpg;base64,{encoded_string}");
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-position: center;
+        background-attachment: fixed;
+    }}
+    </style>
+    """
+    st.markdown(css, unsafe_allow_html=True)
+
+# Use your actual image name
+add_bg_from_local("background.jpg")
 
 # Load the model
 model = load_model("plant_disease_model.h5")
