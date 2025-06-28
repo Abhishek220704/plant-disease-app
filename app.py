@@ -3,6 +3,9 @@ from tensorflow.keras.models import load_model
 from tensorflow.keras.preprocessing import image
 import numpy as np
 from PIL import Image
+import base64
+import pandas as pd
+import matplotlib.pyplot as plt
 
 # Set page config
 st.set_page_config(
@@ -10,8 +13,8 @@ st.set_page_config(
     layout="wide",
     page_icon="🌿"
 )
-import base64
 
+# Add background image
 def add_bg_from_local(image_file):
     with open(image_file, "rb") as file:
         encoded_string = base64.b64encode(file.read()).decode()
@@ -28,8 +31,8 @@ def add_bg_from_local(image_file):
     """
     st.markdown(css, unsafe_allow_html=True)
 
-# Use your actual image name
-add_bg_from_local("background.jpg")
+# Background image
+add_bg_from_local("background.jpg")  # Make sure this image is in your repo root
 
 # Load the model
 model = load_model("plant_disease_model.h5")
@@ -108,20 +111,26 @@ st.sidebar.markdown("""
 
 ## 👨‍💻 Developer
 
-- Abhishek,Tanya,Tauhid,Nakshtra
+- Abhishek, Tanya, Tauhid, Nakshtra  
 - B.Tech Final Year  
-- Capstone Project   
+- Capstone Project  
 """)
-
 
 # Main Title
 st.markdown("<h1 style='text-align: center;'>🌿 Plant Disease Classifier</h1>", unsafe_allow_html=True)
-st.markdown("<h4 style='text-align: center;'>Upload a leaf image and detect the disease in seconds!</h4>", unsafe_allow_html=True)
+st.markdown("<h4 style='text-align: center;'>Upload or capture a leaf image and detect the disease in seconds!</h4>", unsafe_allow_html=True)
 st.write("")
 
-# File uploader
-file = st.file_uploader("📤 Upload a plant leaf image", type=["jpg", "jpeg", "png"])
+# 📷 Capture or upload image
+st.markdown("## 📸 Capture or Upload Leaf Image")
 
+camera_image = st.camera_input("📷 Take a Photo")
+uploaded_file = st.file_uploader("📤 Or Upload a plant leaf image", type=["jpg", "jpeg", "png"])
+
+# Use camera image if available, otherwise uploaded image
+file = camera_image if camera_image else uploaded_file
+
+# Prediction
 if file:
     # 1. Load & preprocess the image
     img = Image.open(file).convert("RGB")
@@ -138,7 +147,7 @@ if file:
     col1, col2 = st.columns([1, 1])
 
     with col1:
-        st.image(img, caption="Uploaded Leaf Image", use_container_width=True)
+        st.image(img, caption="Leaf Image", use_container_width=True)
 
     with col2:
         st.markdown("### 🧠 Prediction")
@@ -147,13 +156,10 @@ if file:
         st.progress(int(confidence * 100))
 
     # 4. Show confidence graph for all classes
-    import pandas as pd
-    import matplotlib.pyplot as plt
+    st.markdown("### 📊 Prediction Confidence Across All Classes")
 
     pred_df = pd.DataFrame(preds[0], index=class_labels, columns=["Confidence"])
     pred_df = pred_df.sort_values(by="Confidence", ascending=True)
-
-    st.markdown("### 📊 Prediction Confidence Across All Classes")
 
     fig, ax = plt.subplots(figsize=(6, len(class_labels) // 2))
     pred_df.plot.barh(ax=ax, legend=False, color='teal')
@@ -161,10 +167,9 @@ if file:
     ax.set_xlim([0, 1])
     st.pyplot(fig)
 
-
 # Footer
 st.markdown("---")
 st.markdown(
-    "<div style='text-align: center;'>Made with ❤️ by <b>Abhishek,Tanya,Tauhid,Nakshtra</b></div>",
+    "<div style='text-align: center;'>Made with ❤️ by <b>Abhishek, Tanya, Tauhid, Nakshtra</b></div>",
     unsafe_allow_html=True
 )
