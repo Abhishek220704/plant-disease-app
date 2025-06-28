@@ -118,28 +118,34 @@ if file:
     pred_class = class_labels[np.argmax(preds)]
     confidence = np.max(preds)
 
-    # Show result
-    col1, col2 = st.columns([1, 1])
+    # ✋ Sanity check: is the confidence too low?
+    if confidence < 0.5:
+        st.image(img, caption="Input Image", use_container_width=True)
+        st.error("❌ This image doesn't seem to be a valid plant leaf. Please try again with a clear leaf photo.")
+    else:
+        # Show result
+        col1, col2 = st.columns([1, 1])
 
-    with col1:
-        st.image(img, caption="Leaf Image", use_container_width=True)
+        with col1:
+            st.image(img, caption="Leaf Image", use_container_width=True)
 
-    with col2:
-        st.markdown("### 🧠 Prediction")
-        st.success(f"Detected: {pred_class}")
-        st.markdown(f"**Confidence:** {confidence * 100:.2f}%")
-        st.progress(int(confidence * 100))
+        with col2:
+            st.markdown("### 🧠 Prediction")
+            st.success(f"Detected: {pred_class}")
+            st.markdown(f"**Confidence:** {confidence * 100:.2f}%")
+            st.progress(int(confidence * 100))
 
-    # Confidence graph
-    st.markdown("### 📊 Prediction Confidence Across All Classes")
-    pred_df = pd.DataFrame(preds[0], index=class_labels, columns=["Confidence"])
-    pred_df = pred_df.sort_values(by="Confidence", ascending=True)
+        # Confidence graph
+        st.markdown("### 📊 Prediction Confidence Across All Classes")
+        pred_df = pd.DataFrame(preds[0], index=class_labels, columns=["Confidence"])
+        pred_df = pred_df.sort_values(by="Confidence", ascending=True)
 
-    fig, ax = plt.subplots(figsize=(6, len(class_labels) // 2))
-    pred_df.plot.barh(ax=ax, legend=False, color='teal')
-    ax.set_xlabel("Confidence Score")
-    ax.set_xlim([0, 1])
-    st.pyplot(fig)
+        fig, ax = plt.subplots(figsize=(6, len(class_labels) // 2))
+        pred_df.plot.barh(ax=ax, legend=False, color='teal')
+        ax.set_xlabel("Confidence Score")
+        ax.set_xlim([0, 1])
+        st.pyplot(fig)
+
 
 # Footer
 st.markdown("---")
