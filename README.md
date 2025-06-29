@@ -7,6 +7,8 @@ This is a deep learning-based web application for detecting plant diseases from 
 
 ---
 ## 📸 Demo Screenshots
+## 📽️ Demo Video
+[Click here to watch the demo video](https://drive.google.com/file/d/1wQqX1X3hg1TbHYaCYQ3YYh1SM1fk_Tka/view?usp=sharing)
 
 ### 🔍 Upload Page
 ![Upload Page](demo/ss1.png)
